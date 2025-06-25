@@ -531,7 +531,7 @@ const App = () => {
       {/* Footer */}
       <footer className="bg-gray-800 text-white py-8 mt-12">
         <div className="container mx-auto px-4 text-center">
-          <h3 className="text-xl font-bold mb-4">Ubuntu Tales</h3>
+          <h3 className="text-xl font-bold mb-4">African Children's Stories Podcast</h3>
           <p className="text-gray-400 mb-4">
             Sharing African stories to inspire and educate children worldwide
           </p>
