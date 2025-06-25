@@ -10,6 +10,7 @@ const App = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedLanguage, setSelectedLanguage] = useState('All');
   const [currentEpisode, setCurrentEpisode] = useState(null);
+  const [currentEpisodeIndex, setCurrentEpisodeIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [featuredEpisodes, setFeaturedEpisodes] = useState([]);
@@ -17,6 +18,7 @@ const App = () => {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(1);
+  const [playbackSpeed, setPlaybackSpeed] = useState(1);
   const audioRef = useRef(null);
 
   useEffect(() => {
