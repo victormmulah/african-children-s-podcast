@@ -110,10 +110,16 @@ const App = () => {
   };
 
   const togglePlayPause = () => {
-    if (isPlaying) {
-      pauseEpisode();
-    } else if (currentEpisode) {
-      setIsPlaying(true);
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+        setIsPlaying(false);
+      } else {
+        audioRef.current.play().catch(error => {
+          console.error('Error playing audio:', error);
+        });
+        setIsPlaying(true);
+      }
     }
   };
 
