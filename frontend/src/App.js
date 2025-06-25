@@ -404,7 +404,7 @@ const App = () => {
         </div>
       </section>
 
-      {/* Audio Player */}
+      {/* Enhanced Audio Player */}
       {currentEpisode && (
         <div className="fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t p-4 z-50">
           <div className="container mx-auto">
@@ -417,6 +417,9 @@ const App = () => {
               <div className="flex-1">
                 <h4 className="font-bold text-gray-800 line-clamp-1">{currentEpisode.title}</h4>
                 <p className="text-sm text-gray-600">{getCategoryIcon(currentEpisode.category)} {currentEpisode.category}</p>
+                <p className="text-xs text-gray-500">
+                  Episode {currentEpisodeIndex + 1} of {episodes.length}
+                </p>
                 
                 {/* Progress Bar */}
                 <div className="mt-2">
@@ -436,7 +439,8 @@ const App = () => {
                 </div>
               </div>
               
-              <div className="flex items-center space-x-4">
+              {/* Enhanced Controls */}
+              <div className="flex items-center space-x-2">
                 {/* Volume Control */}
                 <div className="hidden md:flex items-center space-x-2">
                   <span className="text-sm">🔊</span>
@@ -451,12 +455,60 @@ const App = () => {
                   />
                 </div>
                 
+                {/* Playback Speed */}
+                <button
+                  onClick={changePlaybackSpeed}
+                  className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-2 rounded-full text-sm font-medium transition-colors"
+                  title="Playback Speed"
+                >
+                  {playbackSpeed}x
+                </button>
+                
+                {/* Rewind 5 minutes */}
+                <button
+                  onClick={rewind}
+                  className="bg-gray-200 hover:bg-gray-300 text-gray-700 w-10 h-10 rounded-full flex items-center justify-center text-lg transition-colors"
+                  title="Rewind 5 minutes"
+                >
+                  ⏪
+                </button>
+                
+                {/* Previous Episode */}
+                <button
+                  onClick={playPrevious}
+                  disabled={currentEpisodeIndex <= 0}
+                  className="bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed text-gray-700 w-10 h-10 rounded-full flex items-center justify-center text-lg transition-colors"
+                  title="Previous Episode"
+                >
+                  ⏮️
+                </button>
+                
                 {/* Play/Pause Button */}
                 <button
                   onClick={togglePlayPause}
                   className="bg-orange-500 hover:bg-orange-600 text-white w-12 h-12 rounded-full flex items-center justify-center text-xl transition-colors"
+                  title={isPlaying ? 'Pause' : 'Play'}
                 >
                   {isPlaying ? '⏸️' : '▶️'}
+                </button>
+                
+                {/* Next Episode */}
+                <button
+                  onClick={playNext}
+                  disabled={currentEpisodeIndex >= episodes.length - 1}
+                  className="bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed text-gray-700 w-10 h-10 rounded-full flex items-center justify-center text-lg transition-colors"
+                  title="Next Episode"
+                >
+                  ⏭️
+                </button>
+                
+                {/* Fast Forward 5 minutes */}
+                <button
+                  onClick={fastForward}
+                  className="bg-gray-200 hover:bg-gray-300 text-gray-700 w-10 h-10 rounded-full flex items-center justify-center text-lg transition-colors"
+                  title="Fast Forward 5 minutes"
+                >
+                  ⏩
                 </button>
               </div>
             </div>
@@ -468,7 +520,7 @@ const App = () => {
             src={currentEpisode.audioUrl}
             onTimeUpdate={handleTimeUpdate}
             onLoadedMetadata={handleLoadedMetadata}
-            onEnded={() => setIsPlaying(false)}
+            onEnded={handleAudioEnded}
             autoPlay={isPlaying}
             onPlay={() => setIsPlaying(true)}
             onPause={() => setIsPlaying(false)}
