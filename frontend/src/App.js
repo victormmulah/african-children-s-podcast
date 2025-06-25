@@ -29,6 +29,20 @@ const App = () => {
     fetchEpisodes();
   }, [selectedCategory, selectedLanguage]);
 
+  // Handle audio playback when isPlaying state changes
+  useEffect(() => {
+    if (audioRef.current && currentEpisode) {
+      if (isPlaying) {
+        audioRef.current.play().catch(error => {
+          console.error('Error playing audio:', error);
+          setIsPlaying(false);
+        });
+      } else {
+        audioRef.current.pause();
+      }
+    }
+  }, [isPlaying, currentEpisode]);
+
   const fetchInitialData = async () => {
     try {
       setIsLoading(true);
