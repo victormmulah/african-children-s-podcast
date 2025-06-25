@@ -550,9 +550,9 @@ const App = () => {
             onTimeUpdate={handleTimeUpdate}
             onLoadedMetadata={handleLoadedMetadata}
             onEnded={handleAudioEnded}
-            autoPlay={isPlaying}
             onPlay={() => setIsPlaying(true)}
             onPause={() => setIsPlaying(false)}
+            preload="metadata"
           />
         </div>
       )}
