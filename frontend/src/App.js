@@ -176,6 +176,17 @@ const App = () => {
   const handleLoadedMetadata = () => {
     if (audioRef.current) {
       setDuration(audioRef.current.duration);
+      audioRef.current.playbackRate = playbackSpeed;
+    }
+  };
+
+  const handleAudioEnded = () => {
+    setIsPlaying(false);
+    // Auto-play next episode
+    if (episodes.length > 0 && currentEpisodeIndex < episodes.length - 1) {
+      setTimeout(() => {
+        playNext();
+      }, 1000); // 1 second delay before playing next
     }
   };
 
