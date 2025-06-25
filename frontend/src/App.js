@@ -275,10 +275,10 @@ const App = () => {
         <div className="container mx-auto px-4 text-center">
           <img 
             src="https://images.unsplash.com/photo-1615815102994-75653c209237"
-            alt="Ubuntu Tales Hero"
+            alt="African Children's Stories Hero"
             className="w-32 h-32 rounded-full mx-auto mb-6 object-cover border-4 border-white shadow-lg"
           />
-          <h2 className="text-4xl font-bold mb-4">Welcome to Ubuntu Tales</h2>
+          <h2 className="text-4xl font-bold mb-4">Welcome to African Children's Stories</h2>
           <p className="text-xl mb-6 max-w-3xl mx-auto">
             Discover the magic of African stories! Listen to traditional folktales, 
             learn about culture, and explore the wonderful world of African storytelling.
