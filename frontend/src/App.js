@@ -77,13 +77,20 @@ const App = () => {
     }
   };
 
-  const playEpisode = async (episode) => {
+  const playEpisode = async (episode, episodeIndex = null) => {
     if (currentEpisode?.id === episode.id && isPlaying) {
       pauseEpisode();
       return;
     }
 
     setCurrentEpisode(episode);
+    if (episodeIndex !== null) {
+      setCurrentEpisodeIndex(episodeIndex);
+    } else {
+      // Find the episode index in the current episodes list
+      const index = episodes.findIndex(ep => ep.id === episode.id);
+      setCurrentEpisodeIndex(index >= 0 ? index : 0);
+    }
     setIsPlaying(true);
     
     // Add to play history
@@ -107,6 +114,50 @@ const App = () => {
       pauseEpisode();
     } else if (currentEpisode) {
       setIsPlaying(true);
+    }
+  };
+
+  const playNext = () => {
+    if (episodes.length > 0 && currentEpisodeIndex < episodes.length - 1) {
+      const nextIndex = currentEpisodeIndex + 1;
+      const nextEpisode = episodes[nextIndex];
+      playEpisode(nextEpisode, nextIndex);
+    }
+  };
+
+  const playPrevious = () => {
+    if (episodes.length > 0 && currentEpisodeIndex > 0) {
+      const prevIndex = currentEpisodeIndex - 1;
+      const prevEpisode = episodes[prevIndex];
+      playEpisode(prevEpisode, prevIndex);
+    }
+  };
+
+  const fastForward = () => {
+    if (audioRef.current) {
+      const newTime = Math.min(audioRef.current.currentTime + 300, duration); // 5 minutes = 300 seconds
+      audioRef.current.currentTime = newTime;
+      setCurrentTime(newTime);
+    }
+  };
+
+  const rewind = () => {
+    if (audioRef.current) {
+      const newTime = Math.max(audioRef.current.currentTime - 300, 0); // 5 minutes = 300 seconds
+      audioRef.current.currentTime = newTime;
+      setCurrentTime(newTime);
+    }
+  };
+
+  const changePlaybackSpeed = () => {
+    const speeds = [0.5, 0.75, 1, 1.25, 1.5, 2];
+    const currentIndex = speeds.indexOf(playbackSpeed);
+    const nextIndex = (currentIndex + 1) % speeds.length;
+    const newSpeed = speeds[nextIndex];
+    
+    setPlaybackSpeed(newSpeed);
+    if (audioRef.current) {
+      audioRef.current.playbackRate = newSpeed;
     }
   };
 
