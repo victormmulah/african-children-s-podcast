@@ -390,7 +390,7 @@ const App = () => {
                       ⏱️ {episode.duration}
                     </span>
                     <button
-                      onClick={() => playEpisode(episode)}
+                      onClick={() => playEpisode(episode, episodes.indexOf(episode))}
                       className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full font-medium transition-colors flex items-center space-x-2"
                     >
                       <span>{currentEpisode?.id === episode.id && isPlaying ? '⏸️' : '▶️'}</span>
