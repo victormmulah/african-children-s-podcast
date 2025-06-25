@@ -246,9 +246,9 @@ const App = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center">
-                <span className="text-white text-xl font-bold">U</span>
+                <span className="text-white text-xl font-bold">A</span>
               </div>
-              <h1 className="text-2xl font-bold text-gray-800">Ubuntu Tales</h1>
+              <h1 className="text-2xl font-bold text-gray-800">African Children's Stories</h1>
             </div>
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
