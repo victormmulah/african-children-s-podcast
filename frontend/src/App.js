@@ -232,7 +232,7 @@ const App = () => {
       <div className="min-h-screen bg-gradient-to-b from-orange-100 to-yellow-100 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-orange-500 mx-auto mb-4"></div>
-          <p className="text-orange-600 text-xl font-bold">Loading Ubuntu Tales...</p>
+          <p className="text-orange-600 text-xl font-bold">Loading African Children's Stories...</p>
         </div>
       </div>
     );
