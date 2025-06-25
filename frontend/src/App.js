@@ -79,7 +79,11 @@ const App = () => {
 
   const playEpisode = async (episode, episodeIndex = null) => {
     if (currentEpisode?.id === episode.id && isPlaying) {
-      pauseEpisode();
+      // If same episode is playing, pause it
+      if (audioRef.current) {
+        audioRef.current.pause();
+        setIsPlaying(false);
+      }
       return;
     }
 
@@ -91,6 +95,8 @@ const App = () => {
       const index = episodes.findIndex(ep => ep.id === episode.id);
       setCurrentEpisodeIndex(index >= 0 ? index : 0);
     }
+    
+    // Set playing state to true, audio will auto-play due to useEffect
     setIsPlaying(true);
     
     // Add to play history
@@ -106,6 +112,9 @@ const App = () => {
   };
 
   const pauseEpisode = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+    }
     setIsPlaying(false);
   };
 
